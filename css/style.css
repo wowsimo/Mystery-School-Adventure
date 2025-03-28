@@ -355,3 +355,91 @@ body {
     z-index: 20;
     text-align: center;
 }
+
+/* Aggiungi questo in fondo al CSS */
+#gameMenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1000;
+    width: 400px;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+#gameMenu.visible {
+    display: flex;
+}
+
+.menu-section {
+    margin-bottom: 15px;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    flex-direction: column;
+    width: 100%;
+}
+
+.volume-control input[type="range"] {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.menu-title {
+    font-size: 24px;
+    color: lime;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.menu-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.controls-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.controls-list li {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#menuButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 8px 15px;
+    font-family: 'Amiga', monospace;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+#menuButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}

@@ -125,16 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
     levelManager.addLevel('U_Lab', new Level('U_Lab', UnderGroundLabMatrixImages, 0,0));
     levelManager.addLevel('U_LabPC', new Level('U_LabPC', UnderGroundLabPCMatrixImages, 0,0));
 
-
-
-    // Imposta il livello iniziale
     levelManager.setCurrentLevel('Classroom');
 
     // Avvia il gioco
     const game = new Game();
     game.start();
 
-    // Aggiungi un oggetto all'inventario
     const inventory = Inventory.getInstance();
     inventory.addItem(0, 0, new Item('Letter', './images/letter.png'));
 });

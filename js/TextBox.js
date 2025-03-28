@@ -343,7 +343,7 @@ export class TextBox {
                 return "Hai ottenuto *Chiave dei sotteranei*";
 
             case 18:
-                this.inventory.addItem(1, 3, new Item('Chiavi della scuola', './images/schoolKey.png'));
+                this.inventory.addItem(0, 3, new Item('Chiavi della scuola', './images/schoolKey.png'));
                 return "*Chiave dei sotteranei* è stata aggiunta all'inventario";
 
             case 19:
@@ -373,7 +373,7 @@ export class TextBox {
                     return "Hai ottenuto l'oggetto 'Maschera di ossigeno'.";
 
                 case 2:
-                    this.inventory.addItem(0, 3, new Item('Maschera di ossigeno', './images/mask.png'));
+                    this.inventory.addItem(0, 4, new Item('Maschera di ossigeno', './images/mask.png'));
                     return "Oggetto aggiunto all'inventario.";
 
                 default:
@@ -408,7 +408,7 @@ export class TextBox {
                         return "Adesso non puoi prendere le chiavi";
                     case 2:
                         if (!this.inventory.checkItem('Chiavi 205')) {
-                            this.inventory.addItem(1, 1, new Item('Chiavi 205', './images/Key.png'));
+                            this.inventory.addItem(0, 2, new Item('Chiavi 205', './images/Key.png'));
                             return "Oggetto aggiunto all'inventario.";
                         } else {
                             this.currentDialogueIndex = 4;

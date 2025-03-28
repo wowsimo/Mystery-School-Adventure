@@ -21,6 +21,8 @@ export class Game {
         this.backgroundAudio = null;
         this.currentTrack = null;
         this.isBackgroundPlaying = false;
+        this.sfxVolume = 1;
+        this.createMenu();
     }
 
     static getInstance() {
@@ -100,6 +102,16 @@ export class Game {
     }
 
     handleKeydown(event) {
+        if ((event.key === 'Escape' || event.key === 'm' || event.key === 'M')) {
+            if(this.state === 'MENU' || this.state === 'PLAYING') {
+                this.toggleMenu();
+                event.stopImmediatePropagation();
+                return;
+            }
+        }
+        
+        if (this.state === 'MENU') return;
+
         if (this.state === 'INTRO' && event.key === 'Enter') {
             this.showInstructions();
             this.state = 'INSTRUCTIONS';
@@ -121,10 +133,11 @@ export class Game {
         if (this.state === 'INSTRUCTIONS' && event.key === 'Enter') {
             this.hideInstructions();
             this.state = 'PLAYING';
+            this.menuButton.style.display = 'block';
             return;
         }
 
-        if ((event.key === 'i' || event.key === 'I') && !this.event.eventActive && !this.event.textBox.gameFinisched) {
+        if ((event.key === 'i' || event.key === 'I') && (this.state === "PLAYING" || this.state === "INVENTORY")) {
             this.toggleInventory();
             if(this.event.inventoryOpen){
                 this.event.inventoryOpen = false;
@@ -144,7 +157,7 @@ export class Game {
             return;
         }
 
-        if (event.key === 'e' || event.key === 'E') {
+        if (this.state === "PLAYING" && (event.key === 'e' || event.key === 'E')) {
             this.event.startEvent();
             return;
         }
@@ -423,6 +436,7 @@ export class Game {
 
     playAudio(audioPath) {
         const audio = new Audio(audioPath);
+        audio.volume = this.sfxVolume; // Aggiungi questa riga
         audio.play().catch(error => {
             console.error('Errore nella riproduzione dell\'audio:', error);
         });
@@ -922,7 +936,7 @@ export class Game {
 
         
         this.backgroundAudio = new Audio(`./audio/${trackName}.mp3`);
-        this.backgroundAudio.volume = 0.5; // Volume al 50%
+        this.backgroundAudio.volume = 0.1;
         this.backgroundAudio.loop = true;
         
         this.backgroundAudio.play().catch(error => {
@@ -931,6 +945,74 @@ export class Game {
         
         this.currentTrack = trackName;
         this.isBackgroundPlaying = true;
+    }
+
+    createMenu() {
+        this.menuElement = document.createElement('div');
+        this.menuElement.id = 'gameMenu';
+        
+        this.menuButton = document.createElement('button');
+        this.menuButton.id = 'menuButton';
+        this.menuButton.textContent = 'Menu (ESC)';
+        this.menuButton.style.display = 'none';
+        this.menuButton.addEventListener('click', () => this.toggleMenu());
+        document.body.appendChild(this.menuButton);
+        
+        const menuContent = `
+            <div class="menu-title">OPZIONI</div>
+            <span class="menu-close">X</span>
+            
+            <div class="menu-section">
+                <h3>Controlli</h3>
+                <ul class="controls-list">
+                    <li>Movimento: <span>Frecce/WASD</span></li>
+                    <li>Interagisci: <span>E</span></li>
+                    <li>Inventario: <span>I</span></li>
+                    <li>Menu: <span>ESC/M</span></li>
+                </ul>
+            </div>
+    
+            <div class="menu-section">
+                <h3>Volume Musica</h3>
+                <div class="volume-control">
+                    <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="${this.backgroundAudio?.volume || 0.5}">
+                </div>
+            </div>
+    
+            <div class="menu-section">
+                <h3>Volume Effetti</h3>
+                <div class="volume-control">
+                    <input type="range" id="sfxVolume" min="0" max="1" step="0.1" value="${this.sfxVolume}">
+                </div>
+            </div>
+        `;
+        
+        this.menuElement.innerHTML = menuContent;
+        document.body.appendChild(this.menuElement);
+    
+        // Gestori eventi
+        this.menuElement.querySelector('.menu-close').addEventListener('click', () => this.toggleMenu());
+        this.menuElement.querySelector('#musicVolume').addEventListener('input', (e) => {
+            if(this.backgroundAudio) this.backgroundAudio.volume = e.target.value;
+        });
+        this.menuElement.querySelector('#sfxVolume').addEventListener('input', (e) => {
+            this.sfxVolume = e.target.value;
+        });
+    }
+    
+    toggleMenu() {
+        const shouldShow = !this.menuElement.classList.contains('visible');
+        this.menuElement.classList.toggle('visible', shouldShow);
+
+        this.menuButton.style.display = shouldShow ? 'none' : 'block';
+
+        if(shouldShow) {
+            this.menuElement.querySelector('#musicVolume').value = this.backgroundAudio?.volume ?? 0.5; // Default 0.5
+            this.menuElement.querySelector('#sfxVolume').value = this.sfxVolume;
+            this.state = 'MENU';
+        } else {
+            this.state = 'PLAYING';
+        }
     }
 
 }
