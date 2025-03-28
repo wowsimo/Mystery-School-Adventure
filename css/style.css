@@ -1,0 +1,357 @@
+@font-face {
+    font-family: 'Amiga';
+    src: url('../fonts/amiga.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OldLondon';
+    src: url('../fonts/OldLondon.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'AncientMedium';
+    src: url('../fonts/AncientMedium.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Feelfree';
+    src: url('../fonts/FeelfreePersonalUseRegular-lg2Bw.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Chapbook-Regular';
+    src: url('../fonts/Chapbook-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'TypographerRotunda';
+    src: url('../fonts/TypographerRotunda.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Pencilant Script';
+    src: url('../fonts/Pencilant Script.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PC Senior';
+    src: url('../fonts/pcsenior.ttf') format('truetype');
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Amiga', monospace;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    -webkit-user-select: none;
+    user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+#image {
+    max-width: 75%;
+    max-height: 75%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+#inventory {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    grid-template-rows: repeat(4, 60px);
+    gap: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: none;
+}
+
+.inventory-item {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    border: 1px solid black;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.inventory-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#timer {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#introMessageContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+}
+
+#introImage {
+    width: 100%;
+}
+
+#introMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    opacity: 0.6;
+    font-size: 22px;
+    font-family: 'Chapbook-Regular';
+    font-weight: bold;
+    width: 70%;
+}
+
+#equationContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    width: 40%;
+}
+
+#equationImage {
+    width: auto;
+    height: auto;
+}
+
+#equationText {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#equationInput {
+    width: 50px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-family: 'Amiga';
+    background-color: transparent;
+    color: black;
+    border: none;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+#equationInstructions {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    transform: translateY(100%);
+}
+
+#correctAnswerMessage {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#timeExhaustedVideo {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 100px;
+    height: auto;
+}
+
+#timeExhaustedMessage {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 20;
+}
+
+#dialogueText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#dialogueWindow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 250px;
+    background-color: rgba(47, 45, 44, 0.742);
+    border: 2px solid white;
+    border-radius: 10px;
+    z-index: 20;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#eventButton {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Amiga', monospace;
+    color: white;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    container-type: button;
+}
+
+#registroContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid white;
+    border-radius: 10px;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#registroImage {
+    max-width: 100%;
+    max-height: 70%;
+    object-fit: contain;
+}
+
+#registroText {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#interactionText {
+    position: absolute;
+    bottom: -5px;
+    /* Adjust this value as needed to position below the button */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    font-size: 12px;
+    font-family: 'Amiga', monospace;
+    color: white;
+    font-weight: bold;
+}
+
+#inventoryMessage {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Amiga', monospace;
+    z-index: 20;
+    text-align: center;
+}
+
+#held-item {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+}
+
+#held-item img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+#transitionMessage {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgb(217, 241, 79);
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 18px;
+    font-family: 'Amiga', monospace;
+    z-index: 20;
+    text-align: center;
+}
